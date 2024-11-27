@@ -1,0 +1,28 @@
+#ifndef EVENFIBBONACCI_H
+#define EVENFIBBONACCI_H
+
+#include <map>;
+#include <iostream>;
+
+class EvenFibbonacci
+{
+private:
+    std::map<int64_t, int64_t> dp_table;
+public:
+    EvenFibbonacci();
+
+    int64_t nthFibbonacci(int n) {
+        if (n<=1) {
+            return n;
+        }
+        auto lookup = dp_table.find(n);
+        if (lookup != dp_table.end()) {
+            return lookup->second;
+        }
+        int64_t ans = nthFibbonacci(n-1) + nthFibbonacci(n-2);
+        dp_table.insert({n, ans});
+        return ans;
+    }
+};
+
+#endif // EVENFIBBONACCI_H
